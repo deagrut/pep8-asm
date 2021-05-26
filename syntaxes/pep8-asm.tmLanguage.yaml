@@ -1,0 +1,140 @@
+$schema:   https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json
+name:      Pep/8 Assembly
+scopeName: source.pep8-asm
+
+# TO COMPILE:
+# $ npx js-yaml pep8-asm.tmLanguage.yaml > pep8-asm.tmLanguage.json
+
+patterns:
+  - include: "#symbols"
+  - include: "#comments"
+  - include: "#mnemonics"
+  - include: "#dotDirectives"
+  - include: "#strings"
+  - include: "#constants"
+repository:
+  symbols:
+    patterns:
+      - match: (?i)\b(([A-Z|a-z|_]{1})(\w{0,7}))(?=:)\b
+        captures:
+          '1': {name: variable.name.symbol}
+
+  # Trace Tags
+  trace:
+    patterns:
+      - match: (?i)(#((1c)|(1d)|(1h)|(2d)|(2h))((\\d)+a)?)
+        captures:
+          '1': {name: variable.other.tracetag-format.pep8-asm}
+      - match: (#([a-zA-Z][a-zA-Z0-9]{0,7}))
+        captures:
+          '1': {name: variable.other.tracetag-symbol.pep8-asm}
+
+  # Comment Indicators
+  comments:
+    patterns:
+      - name: comment.line.semicolon.pep8-asm
+        begin: ;
+        end: $
+        patterns:
+          - {include: "#trace"}
+
+  # All PEP/8 mnemonics
+  mnemonics:
+    patterns:
+      - include: "#control"
+      - include: "#operations"
+      - include: "#storage"
+      - include: "#traps"
+
+  # Flow of Control Instructions
+  control:
+    patterns:
+      # Execution Control Instructions
+      - name: keyword.control.execution.pep8-asm
+        match: (?i)\b(STOP)\b
+
+      # Subroutine Instructions
+      - name: keyword.control.subroutine.pep8-asm
+        match: (?i)\b(RET(0|1|2|3|4|5|6|7|TR)|CALL)\b
+
+      # Move Instructions
+      - name: keyword.control.move.pep8-asm
+        match: (?i)\b(MOV(SPA|FLGA))\b
+
+      # Branch Instructions
+      - name: keyword.control.branches.pep8-asm
+        match: (?i)\b(BR(LE|LT|EQ|NE|GE|GT|V|C)?)\b
+
+      # Standards Input & Output Instructions
+      - name: keyword.control.io.pep8-asm
+        match: (?i)\b(CHAR[IO])\b
+
+      # Stack Pointer Instructions
+      - name: keyword.control.stack-pointer.pep8-asm
+        match: (?i)\b((ADD|SUB)sp)\b
+
+  # General Operations
+  operations:
+    patterns:
+      # Bitwise Operations
+      - name: keyword.operators.bitwise.pep8-asm
+        match: (?i)\b((NOT|NEG|AS[LR]|RO[LR]|AND|OR)[ax])\b
+
+      # Arithmetic Operations
+      - name: keyword.operators.arithmetic.pep8-asm
+        match: (?i)\b((ADD|SUB)[ax])\b
+
+      # Relationnal Operations
+      - name: keyword.operators.relation.pep8-asm
+        match: (?i)\b(CP[ax])\b
+
+  # Memory Operations
+  storage:
+    patterns:
+      # Memory Operations
+      - name: storage.type.memory.pep8-asm
+        match: (?i)\b((LD|ST)(BYTE)?[ax])\b
+
+  # Trap Instructions
+  traps:
+    patterns:
+      # System Input & Output Traps
+      - name: support.function.traps.nonunary.pep8-asm
+        match: (?i)\b(DEC[IO]|STRO|NOP)\b
+
+      # System Do Nothing Operations
+      - name: support.function.traps.unary.pep8-asm
+        match: (?i)\b(NOP[0-3])\b
+
+  # All PEP/8 assembly directives
+  dotDirectives:
+    patterns:
+      # All PEP/8 assembly directives
+      - name: keyword.operators.asm-directives.pep8-asm
+        match: (?i)\.\b(A(DDRSS|SCII)|B(LOCK|URN)|E(ND|QUATE)|WORD)\b
+
+  # Strings
+  strings:
+    patterns:
+      # Double Quote Strings
+      - name: string.quoted.double.pep8-asm
+        match: ((")((([^"|\\])|((\\)([\''|b|f|n|r|t|v|"|\\]))|((\\)(([x|X])([0-9|A-F|a-f]{2}))))*)("))
+
+      # Single Quote Strings
+      - name: string.quoted.single.pep8-asm
+        match: ((\'')(?![\''])(([^\''|\\]){1}|((\\)([\''|b|f|n|r|t|v|"|\\]))|((\\)(([x|X])([0-9|A-F|a-f]{2}))))(\''))
+
+  # In-Program Constants
+  constants:
+    patterns:
+      # Decimal Numbers
+      - name: constant.numeric.dec.pep8-asm
+        match: -?\b\d+\b
+      # Hexadecimal Numbers or Addresses
+      - name: constant.numeric.hex.pep8-asm
+        match: \b(0x\d{4})\b
+
+      # PEP/8 Addressing Modes
+      - match: \b\s*(,\s*([idnx]|sx?f?))\b
+        captures:
+          '2': {name: constant.language.addressing-mode.pep8-asm}

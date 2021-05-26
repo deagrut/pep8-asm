@@ -1,0 +1,185 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Pep/8 Assembly",
+	"scopeName": "source.pep8-asm",
+	"patterns": [
+		{
+			"include": "#symbols"
+		},
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#mnemonics"
+		},
+		{
+			"include": "#dotDirectives"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#constants"
+		}
+	],
+	"repository": {
+		"symbols": {
+			"patterns": [
+				{
+					"match": "(?i)\\b(([A-Z|a-z|_]{1})(\\w{0,7}))(?=:)\\b",
+					"captures": {
+						"1": { "name": "variable.name.symbol" }
+					}
+				}
+			]
+		},
+		"tracetag": {
+			"patterns": [
+				{
+					"match": "(?i)(#((1c)|(1d)|(1h)|(2d)|(2h))((\\d)+a)?)",
+					"captures": {
+						"1": { "name": "variable.other.tracetag-format.pep8-asm" }
+					}
+				},
+				{
+					"match": "(#([a-zA-Z][a-zA-Z0-9]{0,7}))",
+					"captures": {
+						"1": { "name": "variable.other.tracetag-symbol.pep8-asm" }
+					}
+				}
+			]
+		},
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.line.semicolon.pep8-asm",
+					"begin": ";",
+					"end": "$",
+					"patterns": [
+						{
+							"include": "#tracetag"
+						}
+					]
+				}
+			]
+		},
+		"mnemonics": {
+			"patterns": [
+				{
+					"include": "#control"
+				},
+				{
+					"include": "#operations"
+				},
+				{
+					"include": "#storage"
+				},
+				{
+					"include": "#traps"
+				}
+			]
+		},
+		"control": {
+			"patterns": [
+				{
+					"name": "keyword.control.execution.pep8-asm",
+					"match": "(?i)\\b(STOP)\\b"
+				},
+				{
+					"name": "keyword.control.subroutine.pep8-asm",
+					"match": "(?i)\\b(RET(0|1|2|3|4|5|6|7|TR)|CALL)\\b"
+				},
+				{
+					"name": "keyword.control.move.pep8-asm",
+					"match": "(?i)\\b(MOV(SPA|FLGA))\\b"
+				},
+				{
+					"name": "keyword.control.branches.pep8-asm",
+					"match": "(?i)\\b(BR(LE|LT|EQ|NE|GE|GT|V|C)?)\\b"
+				},
+				{
+					"name": "keyword.control.io.pep8-asm",
+					"match": "(?i)\\b(CHAR[IO])\\b"
+				},
+				{
+					"name": "keyword.control.stack-pointer.pep8-asm",
+					"match": "(?i)\\b((ADD|SUB)sp)\\b"
+				}
+			]
+		},
+		"operations": {
+			"patterns": [
+				{
+					"name": "keyword.operators.bitwise.pep8-asm",
+					"match": "(?i)\\b((NOT|NEG|AS[LR]|RO[LR]|AND|OR)[ax])\\b"
+				},
+				{
+					"name": "keyword.operators.arithmetic.pep8-asm",
+					"match": "(?i)\\b((ADD|SUB)[ax])\\b"
+				},
+				{
+					"name": "keyword.operators.relation.pep8-asm",
+					"match": "(?i)\\b(CP[ax])\\b"
+				}
+			]
+		},
+		"storage": {
+			"patterns": [
+				{
+					"name": "storage.type.memory.pep8-asm",
+					"match": "(?i)\\b((LD|ST)(BYTE)?[ax])\\b"
+				}
+			]
+		},
+		"traps": {
+			"patterns": [
+				{
+					"name": "support.function.traps.nonunary.pep8-asm",
+					"match": "(?i)\\b(DEC[IO]|STRO|NOP)\\b"
+				},
+				{
+					"name": "support.function.traps.unary.pep8-asm",
+					"match": "(?i)\\b(NOP[0-3])\\b"
+				}
+			]
+		},
+		"dotDirectives": {
+			"patterns": [
+				{
+					"name": "keyword.operators.asm-directives.pep8-asm",
+					"match": "(?i)\\.\\b(A(DDRSS|SCII)|B(LOCK|URN)|E(ND|QUATE)|WORD)\\b"
+				}
+			]
+		},
+		"strings": {
+			"patterns": [
+				{
+					"name": "string.quoted.double.pep8-asm",
+					"match": "((\")((([^\"|\\\\])|((\\\\)([\\'|b|f|n|r|t|v|\"|\\\\]))|((\\\\)(([x|X])([0-9|A-F|a-f]{2}))))*)(\"))"
+				},
+				{
+					"name": "string.quoted.single.pep8-asm",
+					"match": "((\\')(?![\\'])(([^\\'|\\\\]){1}|((\\\\)([\\'|b|f|n|r|t|v|\"|\\\\]))|((\\\\)(([x|X])([0-9|A-F|a-f]{2}))))(\\'))"
+				}
+			]
+		},
+		"constants": {
+			"patterns": [
+				{
+					"name": "constant.numeric.dec.pep8-asm",
+					"match": "-?\\b\\d+\\b"
+				},
+				{
+					"name": "constant.numeric.hex.pep8-asm",
+					"match": "\\b(0x\\d{4})\\b"
+				},
+				{
+					"match": "\\b\\s*(,\\s*([idnx]|sx?f?))\\b",
+					"captures": {
+						"2": { "name": "constant.language.addressing-mode.pep8-asm" }
+					}
+				}
+			]
+		}
+	}
+}

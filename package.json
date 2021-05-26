@@ -1,0 +1,58 @@
+{
+	"name": "pep8-asm",
+	"displayName": "Pep/8 Assembly Highlighter",
+	"icon": "images/Pep8-icon.png",
+	"version": "0.0.0",
+	"preview": true,
+	"publisher": "deagrut",
+	"description": "Language support for the Pep/8 assembly language",
+	"engines": {
+        "vscode": "^1.56.0"
+	},
+	"author": {
+		"name": "D. Eagrut",
+		"email": "deagrut@gmail.com",
+		"url": "https://www.github.com/deagrut"
+	},
+	"categories": [
+		"Programming Languages"
+	],
+	"keywords": [
+		"Pep/8 Assembly",
+		"Computer Systems"
+	],
+	"contributes": {
+		"languages": [
+			{
+				"id": "pep8-asm",
+				"aliases": [
+					"Pep/8 Assembly",
+					"pep8"
+				],
+				"extensions": [
+					".pep"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "pep8-asm",
+				"scopeName": "source.pep8-asm",
+				"path": "./syntaxes/pep8-asm.tmLanguage.json"
+			}
+		]
+	},
+	"devDependencies": {
+		"js-yaml": "^3.13.1"
+	},
+	"license": "MIT",
+	"homepage": "https://github.com/deagrut/pep8-asm/blob/main/README.md",
+	"repository": {
+		"type": "git",
+		"url": "https://www.github.com/deagrut/pep8-asm"
+	},
+	"bugs": {
+	  "url": "https://www.github.com/deagrut/pep8-asm/issues"
+	}
+}
