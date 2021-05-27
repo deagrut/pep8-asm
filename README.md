@@ -20,7 +20,7 @@ Here is a non-exhaustive list of additions and modifications to pep9:
 - Traps instructions highlighting betterized.
 - Etc.
 
-![Highlighted syntax example](https://github.com/deagrut/pep8-asm/raw/main/images/syntax-example.png)
+![Highlighted syntax example](./images/syntax-example.png)
 
 ## Features
 
