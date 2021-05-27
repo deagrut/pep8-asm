@@ -2,7 +2,7 @@
 	"name": "pep8-asm",
 	"displayName": "Pep/8 Assembly Highlighter",
 	"icon": "images/Pep8-icon.png",
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"preview": true,
 	"publisher": "deagrut",
 	"description": "Language support for the Pep/8 assembly language",
@@ -12,7 +12,7 @@
 	"author": {
 		"name": "D. Eagrut",
 		"email": "deagrut@gmail.com",
-		"url": "https://www.github.com/deagrut"
+		"url": "https://github.com/deagrut"
 	},
 	"categories": [
 		"Programming Languages"
@@ -50,9 +50,9 @@
 	"homepage": "https://github.com/deagrut/pep8-asm/blob/main/README.md",
 	"repository": {
 		"type": "git",
-		"url": "https://www.github.com/deagrut/pep8-asm"
+		"url": "https://github.com/deagrut/pep8-asm"
 	},
 	"bugs": {
-	  "url": "https://www.github.com/deagrut/pep8-asm/issues"
+	  "url": "https://github.com/deagrut/pep8-asm/issues"
 	}
 }
