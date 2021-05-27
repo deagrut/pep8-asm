@@ -20,7 +20,7 @@ Here is a non-exhaustive list of additions and modifications to pep9:
 - Traps instructions highlighting betterized.
 - Etc.
 
-![](https://github.com/deagrut/pep8-asm/raw/main/images/syntax-example.png)
+![Highlighted syntax example](https://github.com/deagrut/pep8-asm/raw/main/images/syntax-example.png)
 
 ## Features
 
@@ -32,11 +32,17 @@ Here is a non-exhaustive list of additions and modifications to pep9:
 
     A start marker without a corresponding end marker will not allow code folding in Visual Studio Code.
 
-    You can edit them directly in the source code of the extension which is located in the Visual Studio Code user folder (`C:\Users\<yourUserName>\.vscode\extensions\deagrut.pep8-asm-X.X.X` for Windows, please refer to the official documentation for other OS's), but any update for this extension will erase these personnalization due to the structure of Language Support extensions.
+    Unfolded :
+
+    ![Unfolded example](./images/code_folding_0-example.png)
+
+    Folded :
+
+    ![Folded example](./images/code_folding_1-example.png)
+
+    You can edit them directly in the source code of the extension which is located in the Visual Studio Code user folder (`C:\Users\<yourUserName>\.vscode\extensions\deagrut.pep8-asm-X.X.X > folding{} > markers {}` for Windows, please refer to the official documentation for other OS's), but any update for this extension will erase these personnalization due to the structure of Language Support extensions.
     
 
 ## Release Notes
 
-### 0.0.0
-
-Initial release
+See [CHANGELOG.md](https://github.com/deagrut/pep8-asm/blob/main/CHANGELOG.md) for release notes.
